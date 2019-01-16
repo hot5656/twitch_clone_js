@@ -1,0 +1,148 @@
+// background image
+@mixin bg($name)
+  background-image: image-url($name)
+  width: image-width($name)
+  height: image-height($name)
+// hide-text
+@mixin hide-text
+  white-space: nowrap
+  text-indent: 100%
+  overflow: hidden
+
+// grid
+@mixin grid($width_all, $cloum_number, $cloum_gutter)
+  width: ($width_all - $cloum_gutter*($cloum_number - 1))/$cloum_number
+  margin-right: $cloum_gutter
+  box-sizing: border-box
+  &:nth-child(#{$cloum_number}n)
+    margin-right: 0
+// 圓形
+@mixin circle($size, $bg)
+  width: $size
+  height: $size
+  border-radius: $size / 2
+  background: $bg
+// 圓形外框
+@mixin circle-frame($size, $color)
+  width: $size
+  height: $size
+  border-radius: $size / 2
+  border: 1px solid $color
+// 圓形外框含內圓
+@mixin circle-frame-in($size, $size-in, $color)
+  width: $size
+  height: $size
+  border-radius: $size / 2
+  border: 1px solid $color
+  position: relative
+  &:before
+    content: ''
+    position: absolute
+    // left: calc( $size/2 -  $size-in/2 - 1px)
+    left: $size/2 -  $size-in/2 - 1px
+    // top: calc( $size/2 -  $size-in/2 - 1px)
+    top:  $size/2 -  $size-in/2 - 1px
+    width: $size-in
+    height: $size-in
+    border-radius: 50%
+    background: $color
+// 橫列中間線
+@mixin line-middle($height, $width, $line-width, $color)
+  position: relative
+  height: $line-width
+  width: $width
+  top: ($height - $line-width) / 2
+  background: $color
+
+// 三角形　ｄefault 正三角形，type=0.86666 為正三角形
+// $direct 箭頭方向
+@mixin triangle ($size, $color, $direct,$type:1)
+  height: 0
+  width: 0
+  @if $direct == top 
+    border-bottom: ($size*$type) solid $color
+    border-left: ($size/2) solid transparent
+    border-right: ($size/2) solid transparent
+  @else if $direct == right 
+    border-left: ($size*$type) solid $color
+    border-top: ($size/2) solid transparent
+    border-bottom: ($size/2) solid transparent
+  @else if $direct == bottom 
+    border-top: ($size*$type) solid $color
+    border-left: ($size/2) solid transparent
+    border-right: ($size/2) solid transparent
+  @else if $direct == left 
+    border-right: ($size*$type) solid $color
+    border-top: ($size/2) solid transparent
+    border-bottom: ($size/2) solid transparent
+  @else if $direct == right-top
+    border-right: $size solid $color
+    border-bottom: $size solid transparent
+  @else if $direct == left-top
+    border-left: $size solid $color
+    border-bottom: $size solid transparent
+  @else if $direct == right-bottom
+    border-right: $size solid $color
+    border-top: $size solid transparent
+  @else if $direct == left-bottom
+    border-left: $size solid $color
+    border-top: $size solid transparent  
+// 矩形
+@mixin square($width, $height, $bg, $color)
+  box-sizing: border-box
+  width: $width
+  height: $height
+  background: $bg
+  color: $color
+// 另一背景顏色(應先設 position: relative)
+@mixin second-bg($color, $opacity)
+  &:before
+    background-color: $color
+    opacity: $opacity
+    content: ''
+    display: block
+    position: absolute
+    height: 100%
+    width: 100%
+// background(include $opacity)
+@mixin bg($color, $opacity)
+  position: absolute
+  background-color: $color
+  opacity: $opacity
+  height: 100%
+  width: 100%
+
+
+
+// extend
+@mixin clearfix
+  &:before
+    content: ""
+    display: table
+  &:after
+    content: ""
+    display: table
+    clear: both
+
+// breakpoint
+// pc : pc
+// pad : pd
+// pad-s : ps
+// mobile : mb
+@mixin breakpoint($point)
+  @if $point == pc
+    @media only screen and (min-width: 1024px)
+      @content
+  @else if $point == pd
+    @media only screen and (max-width: 1023px)
+      @content	
+  @else if $point == ps
+    @media only screen and (max-width: 767px)
+      @content	
+  @else if $point == mb	// test need from 320px
+    @media only screen and (max-width: 568px) 
+      @content	
+
+.clearfix
+  clear: both
+
