@@ -5,6 +5,8 @@ let apiUrl;
 let isLoad = false ;
 let isLoadLastItem = false ;
 let liveCounter = 0 ;
+var languageType = "en" ;
+
 
 window.onload=function(){
 	queryLive(procesLiveInfo) ;
@@ -29,10 +31,6 @@ window.addEventListener('scroll', function(e) {
 			isLoad = false ;
 
 			offset+= limitItem;
-			apiUrl =  "https://api.twitch.tv/kraken/streams/?client_id=" + 
-								clientId +
-								"&game=League%20of%20Legends&limit=" +
-								limitItem + "&offset=" + offset ;
 			queryLive(procesLiveInfo) ;
 			console.log("offset = " + offset);
 		}
@@ -54,11 +52,10 @@ function newAjax() {
 
 function queryLive(cb) {
 	var ajaxHandler = newAjax();
-	apiUrl =  "https://api.twitch.tv/kraken/streams/?client_id=" + 
-						clientId +
-						"&game=League%20of%20Legends&limit=" +
-						limitItem + "&offset=" + offset ;
-
+	apiUrl =  "https://api.twitch.tv/kraken/streams/?client_id=" + clientId +
+						"&language=" + languageType + 
+						"&game=League%20of%20Legends&limit=" + limitItem + 
+						"&offset=" + offset ;
 	ajaxHandler.onreadystatechange = function(){
 		if (ajaxHandler.readyState==4 && ajaxHandler.status==200) {
 			// json to object
@@ -104,3 +101,19 @@ function getColumn(data) {
 	</div>
 	`;
 }
+
+function language(lang) {
+	if (lang !== languageType) {
+		const col = document.querySelectorAll('.col');
+		for (let i=0 ; i<col.length ; i++ ) {
+			col[i].remove();
+		}
+
+		// add i18n
+		document.querySelector(".head h1").textContent = window.I18N[lang].title;
+
+		languageType = lang;
+		offset = 0;
+		queryLive(procesLiveInfo) ;
+	}
+} 

@@ -333,7 +333,19 @@ input[type="submit"]:hover {
   background-attachment: fixed;
   background-image: url("../img/bg-default.jpg"); }
   .p-index .container {
-    background-color: rgba(0, 0, 0, 0.6); }
+    background-color: rgba(0, 0, 0, 0.6);
+    min-height: 100vh; }
+    .p-index .container .head {
+      text-align: center; }
+      .p-index .container .head > h1 {
+        color: white;
+        padding-top: 20px;
+        padding-bottom: 10px;
+        margin: 0; }
+      .p-index .container .head > a {
+        color: white; }
+        .p-index .container .head > a:hover {
+          color: #1000ff; }
   .p-index .row {
     margin: 0 auto;
     padding-top: 30px;
@@ -404,10 +416,11 @@ input[type="submit"]:hover {
         float: left;
         margin-top: 7px;
         white-space: nowrap;
-        overflow: hidden;
-        -o-text-overflow: ellipsis;
-           text-overflow: ellipsis;
-        width: 220px; }
+        width: 230px; }
+        .p-index .row .col .descript .introduce .ch-name {
+          overflow: hidden;
+          -o-text-overflow: ellipsis;
+             text-overflow: ellipsis; }
       .p-index .row .col:hover {
         cursor: pointer;
         -webkit-filter: brightness(1.4);
