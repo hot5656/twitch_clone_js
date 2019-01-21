@@ -9,15 +9,22 @@
 	<div class="container">
 		<div class="head">
 			<h1>The streams in English</h1>
-			<a href="#" onclick="language('zh-tw'); return false">中文</a>
-			<a href="#" onclick="language('en'); return false">English</a>
+			<!-- not webpack -->
+			<!-- <a href="#" onclick="language('zh-tw'); return false">中文</a>
+			<a href="#" onclick="language('en'); return false">English</a> -->
+			<!-- webpack -->
+			<a href="#" class="lang_tw">中文</a>
+			<a href="#" class="lang_en">English</a>
 		</div>
 		<div class="row">
 		</div>
 	</div>
 	<!-- js process -->
-	<script src="js/all.js"></script>
+	<!-- not webpack -->
+	<!-- <script src="js/all.js"></script>
 	<script src="js/lang-en.js"></script>
-	<script src="js/lang-zh-tw.js"></script>
+	<script src="js/lang-zh-tw.js"></script> -->
+	<!-- webpack -->
+	<script src="js/boundle.js"></script>
 </body>
 </html>
