@@ -1,5 +1,11 @@
 // add i18n
-if (!window.I18N) window.I18N = {};
-window.I18N['en'] = {
+// not webpack
+// if (!window.i18n) window.i18n = {};
+// window.i18n['en'] = {
+//   title: 'The streams in English'
+// }
+
+// webpack
+module.exports = {
   title: 'The streams in English'
 }
